@@ -1,0 +1,5 @@
+.bitcoin/*
+!.bitcoin/.gitkeep
+.dfx
+node_modules
+target

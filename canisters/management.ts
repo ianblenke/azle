@@ -28,6 +28,9 @@ import {
     Variant
 } from '../index';
 
+import * as Bitcoin from './management/bitcoin';
+export * as Bitcoin from './management/bitcoin';
+
 export type CanisterId = Principal;
 export type UserId = Principal;
 export type WasmModule = blob;
@@ -125,6 +128,12 @@ export type ProvisionalTopUpCanisterArgs = {
 };
 
 export type Management = Canister<{
+    bitcoin_get_utxos(
+        args: Bitcoin.GetUtxosArgs
+    ): CanisterResult<Bitcoin.GetUtxosArgs>;
+    bitcoin_get_balance(
+        args: Bitcoin.GetBalanceArgs
+    ): CanisterResult<Bitcoin.Satoshi>;
     create_canister(
         args: CreateCanisterArgs
     ): CanisterResult<CreateCanisterResult>;
