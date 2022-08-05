@@ -1,12 +1,12 @@
 import { Variant } from 'azle';
-import { Bitcoin } from 'azle/canisters/management';
+import { BitcoinGetUtxosResult, Satoshi } from 'azle/canisters/management';
 
 export type GetUtxosResult = Variant<{
-    ok: Bitcoin.GetUtxosResult;
+    ok: BitcoinGetUtxosResult;
     err: string;
 }>;
 
 export type GetBalanceResult = Variant<{
-    ok: Bitcoin.Satoshi;
+    ok: Satoshi;
     err: string;
 }>;

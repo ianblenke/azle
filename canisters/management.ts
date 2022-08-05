@@ -23,13 +23,12 @@ import {
     CanisterResult,
     ic,
     nat,
+    nat32,
+    nat64,
     Opt,
     Principal,
     Variant
 } from '../index';
-
-import * as Bitcoin from './management/bitcoin';
-export * as Bitcoin from './management/bitcoin';
 
 export type CanisterId = Principal;
 export type UserId = Principal;
@@ -127,13 +126,61 @@ export type ProvisionalTopUpCanisterArgs = {
     amount: nat;
 };
 
+// #region Bitcoin
+export type Address = string;
+export type BlockHash = blob;
+
+export type BitcoinGetBalanceArgs = {
+    network: Network;
+    address: Address;
+};
+
+export type BitcoinGetUtxosArgs = {
+    address: Address;
+    filter?: UtxosFilter;
+    network: Network;
+};
+
+export type BitcoinGetUtxosResult = {
+    next_page: Opt<Page>;
+    tip_block_hash: BlockHash;
+    tip_height: nat32;
+    utxos: Utxo[];
+};
+
+export type Network = Variant<{
+    Mainnet: null;
+    Regtest: null;
+    Testnet: null;
+}>;
+
+export type Outpoint = {
+    txid: blob;
+    vout: nat32;
+};
+
+export type Page = blob;
+
+export type Utxo = {
+    height: nat32;
+    outpoint: Outpoint;
+    value: Satoshi;
+};
+
+export type UtxosFilter = Variant<{
+    MinConfirmations: nat32;
+    Page: Page;
+}>;
+
+export type Satoshi = nat64;
+
+// #endregion
+
 export type Management = Canister<{
     bitcoin_get_utxos(
-        args: Bitcoin.GetUtxosArgs
-    ): CanisterResult<Bitcoin.GetUtxosArgs>;
-    bitcoin_get_balance(
-        args: Bitcoin.GetBalanceArgs
-    ): CanisterResult<Bitcoin.Satoshi>;
+        args: BitcoinGetUtxosArgs
+    ): CanisterResult<BitcoinGetUtxosResult>;
+    bitcoin_get_balance(args: BitcoinGetBalanceArgs): CanisterResult<Satoshi>;
     create_canister(
         args: CreateCanisterArgs
     ): CanisterResult<CreateCanisterResult>;
