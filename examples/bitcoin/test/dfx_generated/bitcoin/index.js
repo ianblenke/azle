@@ -4,7 +4,7 @@ import { Actor, HttpAgent } from '@dfinity/agent';
 import { idlFactory } from './bitcoin.did.js';
 export { idlFactory } from './bitcoin.did.js';
 // CANISTER_ID is replaced by webpack based on node environment
-export const canisterId = process.env.AZLE_CANISTER_ID;
+export const canisterId = process.env.BITCOIN_CANISTER_ID;
 
 /**
  *
