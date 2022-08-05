@@ -1,13 +1,10 @@
 import { CanisterResult, Update } from 'azle';
-import {
-    ManagementCanister,
-    BitcoinGetUtxosResult,
-    Satoshi
-} from 'azle/canisters/management';
-import { GetUtxosResult, GetBalanceResult } from './types';
+import { ManagementCanister } from 'azle/canisters/management';
+import { GetUtxosResult, Satoshi } from 'azle/canisters/management/bitcoin';
+import { ExecuteGetUtxosResult, ExecuteGetBalanceResult } from './types';
 
-export function* get_utxos(address: string): Update<GetUtxosResult> {
-    const canister_result: CanisterResult<BitcoinGetUtxosResult> =
+export function* get_utxos(address: string): Update<ExecuteGetUtxosResult> {
+    const canister_result: CanisterResult<GetUtxosResult> =
         yield ManagementCanister.bitcoin_get_utxos({
             address,
             filter: null,
@@ -17,7 +14,7 @@ export function* get_utxos(address: string): Update<GetUtxosResult> {
     return canister_result;
 }
 
-export function* get_balance(address: string): Update<GetBalanceResult> {
+export function* get_balance(address: string): Update<ExecuteGetBalanceResult> {
     const canister_result: CanisterResult<Satoshi> =
         yield ManagementCanister.bitcoin_get_balance({
             address,

@@ -1,10 +1,10 @@
-type BitcoinGetUtxosArgs = record {
+type GetUtxosArgs = record {
     "address": text;
     "filter": opt UtxosFilter;
     "network": Network;
 };
 
-type BitcoinGetBalanceArgs = record {
+type GetBalanceArgs = record {
     "network": Network;
     "address": text;
     "min_confirmations": opt nat32;
@@ -60,7 +60,7 @@ type ProvisionalTopUpCanisterArgs = record {
     "amount": nat;
 };
 
-type BitcoinGetUtxosResult = record {
+type GetUtxosResult = record {
     "next_page": opt blob;
     "tip_block_hash": blob;
     "tip_height": nat32;
@@ -108,9 +108,9 @@ type DefiniteCanisterSettings = record {
     "freezing_threshold": nat;
 };
 
-type GetUtxosResult = variant { "ok": BitcoinGetUtxosResult; "err": text };
+type ExecuteGetUtxosResult = variant { "ok": GetUtxosResult; "err": text };
 
-type GetBalanceResult = variant { "ok": nat64; "err": text };
+type ExecuteGetBalanceResult = variant { "ok": nat64; "err": text };
 
 type UtxosFilter = variant { "MinConfirmations": nat32; "Page": blob };
 
@@ -121,6 +121,6 @@ type InstallCodeMode = variant { "install": null; "reinstall": null; "upgrade": 
 type CanisterStatus = variant { "running": null; "stopping": null; "stopped": null };
 
 service: {
-    "get_utxos": (text) -> (GetUtxosResult);
-    "get_balance": (text) -> (GetBalanceResult);
+    "get_utxos": (text) -> (ExecuteGetUtxosResult);
+    "get_balance": (text) -> (ExecuteGetBalanceResult);
 }
