@@ -1,12 +1,13 @@
 type BitcoinGetUtxosArgs = record {
     "address": text;
-    "filter": UtxosFilter;
+    "filter": opt UtxosFilter;
     "network": Network;
 };
 
 type BitcoinGetBalanceArgs = record {
     "network": Network;
     "address": text;
+    "min_confirmations": opt nat32;
 };
 
 type CreateCanisterArgs = record {

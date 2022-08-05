@@ -1,7 +1,9 @@
 {
     "scripts": {
         "bitcoind": "bitcoind -conf=$(pwd)/.bitcoin.conf -datadir=$(pwd)/.bitcoin --port=18444",
-        "start": "dfx start",
+        "mine": "bitcoin-cli -conf=$(pwd)/.bitcoin.conf generatetoaddress",
+        "deploy": "scripts/deploy.sh bitcoin",
+        "start": "dfx start --enable-bitcoin --clean",
         "test": "ts-node --transpile-only --ignore=false test/test.ts"
     },
     "dependencies": {

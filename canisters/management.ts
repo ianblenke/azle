@@ -133,11 +133,12 @@ export type BlockHash = blob;
 export type BitcoinGetBalanceArgs = {
     network: Network;
     address: Address;
+    min_confirmations: Opt<nat32>;
 };
 
 export type BitcoinGetUtxosArgs = {
     address: Address;
-    filter?: UtxosFilter;
+    filter: Opt<UtxosFilter>;
     network: Network;
 };
 
