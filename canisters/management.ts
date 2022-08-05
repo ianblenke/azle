@@ -32,7 +32,9 @@ import {
     GetUtxosResult,
     Satoshi,
     GetBalanceArgs,
-    GetUtxosArgs
+    GetUtxosArgs,
+    GetCurrentFeePercentilesArgs,
+    Fee
 } from './management/bitcoin';
 
 export type CanisterId = Principal;
@@ -134,6 +136,9 @@ export type ProvisionalTopUpCanisterArgs = {
 export type Management = Canister<{
     bitcoin_get_utxos(args: GetUtxosArgs): CanisterResult<GetUtxosResult>;
     bitcoin_get_balance(args: GetBalanceArgs): CanisterResult<Satoshi>;
+    bitcoin_get_current_fee_percentiles(
+        args: GetCurrentFeePercentilesArgs
+    ): CanisterResult<Fee[]>;
     create_canister(
         args: CreateCanisterArgs
     ): CanisterResult<CreateCanisterResult>;

@@ -3,6 +3,10 @@ export const idlFactory = ({ IDL }) => {
         ok: IDL.Nat64,
         err: IDL.Text
     });
+    const ExecuteGetCurrentFeePercentiles = IDL.Variant({
+        ok: IDL.Vec(IDL.Nat64),
+        err: IDL.Text
+    });
     const Outpoint = IDL.Record({
         txid: IDL.Vec(IDL.Nat8),
         vout: IDL.Nat32
@@ -24,6 +28,11 @@ export const idlFactory = ({ IDL }) => {
     });
     return IDL.Service({
         get_balance: IDL.Func([IDL.Text], [ExecuteGetBalanceResult], []),
+        get_current_fee_percentiles: IDL.Func(
+            [],
+            [ExecuteGetCurrentFeePercentiles],
+            []
+        ),
         get_utxos: IDL.Func([IDL.Text], [ExecuteGetUtxosResult], [])
     });
 };

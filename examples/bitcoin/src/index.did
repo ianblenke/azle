@@ -10,6 +10,10 @@ type GetBalanceArgs = record {
     "min_confirmations": opt nat32;
 };
 
+type GetCurrentFeePercentilesArgs = record {
+    "network": Network;
+};
+
 type CreateCanisterArgs = record {
     "settings": opt CanisterSettings;
 };
@@ -112,6 +116,8 @@ type ExecuteGetUtxosResult = variant { "ok": GetUtxosResult; "err": text };
 
 type ExecuteGetBalanceResult = variant { "ok": nat64; "err": text };
 
+type ExecuteGetCurrentFeePercentiles = variant { "ok": vec nat64; "err": text };
+
 type UtxosFilter = variant { "MinConfirmations": nat32; "Page": blob };
 
 type Network = variant { "Mainnet": null; "Regtest": null; "Testnet": null };
@@ -123,4 +129,5 @@ type CanisterStatus = variant { "running": null; "stopping": null; "stopped": nu
 service: {
     "get_utxos": (text) -> (ExecuteGetUtxosResult);
     "get_balance": (text) -> (ExecuteGetBalanceResult);
+    "get_current_fee_percentiles": () -> (ExecuteGetCurrentFeePercentiles);
 }

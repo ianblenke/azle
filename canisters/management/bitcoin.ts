@@ -2,11 +2,16 @@ import { blob, nat32, nat64, Opt, Variant } from '../../index';
 
 export type Address = string;
 export type BlockHash = blob;
+export type Fee = MillisatoshiPerByte;
 
 export type GetBalanceArgs = {
     network: Network;
     address: Address;
     min_confirmations: Opt<nat32>;
+};
+
+export type GetCurrentFeePercentilesArgs = {
+    network: Network;
 };
 
 export type GetUtxosArgs = {
@@ -21,6 +26,14 @@ export type GetUtxosResult = {
     tip_height: nat32;
     utxos: Utxo[];
 };
+
+export type MillisatoshiPerByte = nat64;
+
+export namespace Network {
+    export const Mainnet: Network = Object.freeze({ Mainnet: null });
+    export const Regtest: Network = Object.freeze({ Regtest: null });
+    export const Testnet: Network = Object.freeze({ Testnet: null });
+}
 
 export type Network = Variant<{
     Mainnet: null;

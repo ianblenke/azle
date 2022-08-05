@@ -40,11 +40,17 @@ export interface DepositCyclesArgs {
     canister_id: Principal;
 }
 export type ExecuteGetBalanceResult = { ok: bigint } | { err: string };
+export type ExecuteGetCurrentFeePercentiles =
+    | { ok: Array<bigint> }
+    | { err: string };
 export type ExecuteGetUtxosResult = { ok: GetUtxosResult } | { err: string };
 export interface GetBalanceArgs {
     network: Network;
     address: string;
     min_confirmations: [] | [number];
+}
+export interface GetCurrentFeePercentilesArgs {
+    network: Network;
 }
 export interface GetUtxosArgs {
     network: Network;
@@ -106,5 +112,9 @@ export type UtxosFilter =
     | { MinConfirmations: number };
 export interface _SERVICE {
     get_balance: ActorMethod<[string], ExecuteGetBalanceResult>;
+    get_current_fee_percentiles: ActorMethod<
+        [],
+        ExecuteGetCurrentFeePercentiles
+    >;
     get_utxos: ActorMethod<[string], ExecuteGetUtxosResult>;
 }
