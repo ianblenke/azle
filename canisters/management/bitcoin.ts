@@ -29,11 +29,11 @@ export type GetUtxosResult = {
 
 export type MillisatoshiPerByte = nat64;
 
-export namespace Network {
-    export const Mainnet: Network = Object.freeze({ Mainnet: null });
-    export const Regtest: Network = Object.freeze({ Regtest: null });
-    export const Testnet: Network = Object.freeze({ Testnet: null });
-}
+export const Network = {
+    Mainnet: { Mainnet: null },
+    Regtest: { Regtest: null },
+    Testnet: { Testnet: null }
+};
 
 export type Network = Variant<{
     Mainnet: null;
